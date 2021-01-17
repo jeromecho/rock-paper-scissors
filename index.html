@@ -1,8 +1,80 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8"> 
         <script>
+            // randomly generate rock, paper, or scissors
+            function computerPlay(){
+                let random = Math.random(); 
+                
+                if (random <= 0.3333){
+                    return "Scissors";
+                } else if (random <= 0.6666){
+                    return "Rock";
+                } else{
+                    return "Paper";
+                }
+            }
             
+            function playRound(playerSelection, computerSelection){
+                // ties, if playerSelection === computerSelection
+                if (playerSelection === computerSelection){
+                    return ('Tie!');
+                }else if (playerSelection === 'Rock' && computerSelection === 'Scissors'){
+                    // if player equals rock and computer is scissors
+                    return ('You win! ' + playerSelection + ' beats ' + computerSelection + '!');
+                }else if (playerSelection === 'Scissors' && computerSelection === 'Paper'){
+                    // if player equals scissors and computer is paper
+                    return ('You win! ' + playerSelection + ' beats ' + computerSelection + '!')
+                }else if (playerSelection === 'Paper' && computerSelection === 'Rock'){
+                    // if player equals paper and computer is rock
+                    return ('You win! ' + playerSelection + ' beats ' + computerSelection + '!')
+                }else if (playerSelection === 'Scissors' && computerSelection === 'Rock'){
+                    // if computer is rock and player is scissors
+                    return ('You lose! ' + playerSelection + ' loses to ' + computerSelection + '!')
+                }else if (playerSelection === 'Paper' && computerSelection === 'Scissors'){
+                    // if computer is scissors and player is paper
+                    return ('You lose! ' + playerSelection + ' loses to ' + computerSelection + '!')
+                }else if (playerSelection === 'Rock' && computerSelection === 'Paper'){
+                     // if computer is paper and player is rock
+                    return ('You lose! ' + playerSelection + ' loses to ' + computerSelection + '!')
+                }
+            }
+
+            function game(){
+                // define counter for AI 
+                let aiCounter = 0;
+                // define counter for player
+                let playerCounter = 0;
+                // make a for loop that runs five times
+                for (j = 0; j < 5; j++){
+                    // define computer selection
+                    const computerSelection = computerPlay(); // stores rock, paper, or scissors to const
+                    // get player selection
+                    const playerSelection = prompt('Choose: Rock, Paper, or Scissors.');
+                    // print playRound to console
+                    console.log(playRound(playerSelection, computerSelection));
+                    // add to ai or player depending on who won 
+                    if ( playRound(playerSelection, computerSelection).slice(4,7) === 'win' ){
+                        playerCounter++;
+                    }else if ( playRound(playerSelection, computerSelection).slice(4,8) === 'lose' ){
+                        aiCounter++;
+                    }
+                    // have if statement that adds if the slice of the function call is tie, you lose, ro you win
+                    console.log('AI: ' + aiCounter);
+                    console.log('Player: ' + playerCounter);
+                } 
+                // have an if statement that decalres winner or loser
+
+                if (aiCounter > playerCounter){
+                    console.log('AI wins.');
+                }else if (playerCounter < aiCounter){
+                    console.log('Player wins.');
+                }else{
+                    console.log('Tie!');
+                }
+            }
+
         </script>
     </head>
     <body></body>
